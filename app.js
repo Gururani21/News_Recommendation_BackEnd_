@@ -25,6 +25,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', NewsController.updateNewsDb)
 
+app.get("/test", (req, res) => {
+  res.json({
+    status: "sucess",
+  });
+});
+
 
 
 
