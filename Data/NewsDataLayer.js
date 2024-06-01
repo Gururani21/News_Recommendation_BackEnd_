@@ -64,13 +64,28 @@ const deleteNews = async(newsId)=>{
       );
 }
 
+const getNews = async (query) => {
+  try {
+    const data = await News.find({ ...query }).limit(10);
+    return data;
+  } catch (error) {}
+};
 
+const getNewsById = async (id) => {
+  try {
+    const data = await News.find({ news_id: id });
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
 const NewsDataLayer = {
-    AddNews,
-    updateNews,
-    deleteNews
-
-}
+  AddNews,
+  updateNews,
+  deleteNews,
+  getNews,
+  getNewsById,
+};
 
 
 module.exports = NewsDataLayer;

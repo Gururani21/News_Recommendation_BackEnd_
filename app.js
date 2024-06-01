@@ -23,7 +23,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-app.get('/', NewsController.updateNewsDb)
+app.get("/", NewsController.serviceStaus);
+
+app.get("/getNews", NewsController.getNews);
+app.get("/getNews/:id", NewsController.getNewsById);
 
 app.get("/test", (req, res) => {
   res.json({
@@ -31,26 +34,26 @@ app.get("/test", (req, res) => {
   });
 });
 
-
-
-
-mongoose.connect('mongodb+srv://ashishgururani8449:MpLrc3dR4PdjcMSs@cluster0.iwxz03v.mongodb.net/', {
-
- 
-   
-   
-  }).then(()=>{
-    console.log("connect to data base")
-    app.listen(port, ()=>{
-
-    console.log("Api is running on port "+port)
-   
-   
-})
-
-  }).catch((error)=>{
-    console.log(error)
+mongoose
+  .connect(
+    "mongodb+srv://ashishgururani8449:MpLrc3dR4PdjcMSs@cluster0.iwxz03v.mongodb.net/",
+    {}
+  )
+  .then(() => {
+    console.log("connect to data base");
+    app.listen(port, () => {
+      console.log("Api is running on port " + port);
+    });
+  })
+  .catch((error) => {
+    console.log(error);
   });
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
+  
 
   
 
