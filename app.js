@@ -5,13 +5,14 @@ const bodyParser = require("body-parser");
 const { error } = require('console');
 const getQuotes  = require('./utils/getContentFromUrl');
 const NewsController = require('./BL/NewsDataController');
+const cors = require("cors");
 const port = 5000;
 // const MongoStore = require("connect-mongo");
 
-
-
 // create our Express app
 const app = express();
+// Enable all CORS requests
+app.use(cors());
 
 // serves up static files from the public folder. Anything in public/ will just be served up as the file it is
 app.use(express.static(path.join(__dirname, "public")));
