@@ -66,6 +66,7 @@ const deleteNews = async(newsId)=>{
 
 const getNews = async (query) => {
   try {
+    console.log(query)
     const data = await News.find({ ...query }).limit(10);
     return data;
   } catch (error) {}

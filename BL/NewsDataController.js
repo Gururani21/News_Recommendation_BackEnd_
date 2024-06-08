@@ -110,14 +110,22 @@ const addContent = async () => {
 };
 
 const getNews = async (req, res) => {
-  console.log(req.query);
+ // console.log(req.query);
   let defaultSearch = {};
   if (req.query) {
-    defaultSearch = { ...defaultSearch, ...res.query };
+    defaultSearch = { ...defaultSearch, ...req.query };
   }
-  console.log(defaultSearch);
+  if (req.query["image_url"]) {
+    defaultSearch = { ...defaultSearch, image_url: { $ne: null } };
+  }
+  if (req.query["category"]) {
+  //  console.log(defaultSearch['category'])
+    defaultSearch["category"] = defaultSearch["category"].split(",");
+  }
+ // console.log(defaultSearch)
+  //console.log(defaultSearch);
   const data = await NewsDataLayer.getNews(defaultSearch);
-  console.log(data);
+  // console.log(data);
 
   res.status(200).json({ status: "Sucess", data });
 };
