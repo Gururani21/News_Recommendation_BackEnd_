@@ -6,6 +6,7 @@ const { error } = require('console');
 const getQuotes  = require('./utils/getContentFromUrl');
 const NewsController = require('./BL/NewsDataController');
 const cors = require("cors");
+const UserEventController = require('./BL/UserEventController');
 const port = 5000;
 // const MongoStore = require("connect-mongo");
 
@@ -28,6 +29,8 @@ app.get("/", NewsController.serviceStaus);
 
 app.get("/getNews", NewsController.getNews);
 app.get("/getNews/:id", NewsController.getNewsById);
+app.get("/userHistory/:id", UserEventController.getUserHistory);
+app.post("/userEvent", UserEventController.AdduserEvent);
 
 app.get("/test", (req, res) => {
   res.json({
