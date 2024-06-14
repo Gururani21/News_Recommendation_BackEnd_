@@ -28,6 +28,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/", NewsController.serviceStaus);
 
 app.get("/getNews", NewsController.getNews);
+app.get("/searchNews", NewsController.searchNews);
 app.get("/getNews/:id", NewsController.getNewsById);
 app.get("/userHistory/:id", UserEventController.getUserHistory);
 app.post("/userEvent", UserEventController.AdduserEvent);

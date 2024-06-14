@@ -80,12 +80,38 @@ const getNewsById = async (id) => {
     console.log(err);
   }
 };
+const searchNews = async (text) => {
+  try {
+    // News.createIndex({
+    //   title: "text",
+    //   content: "text",
+    //   author: "text",
+    //   description: "text",
+    // });
+    // List of fields to search
+    const fields = ["title", "content", "description"]; // Replace with your actual fields
+
+    // Create a regular expression for case-insensitive substring search
+    const regex = new RegExp(text, "i");
+
+    // Build a query that searches in all specified fields
+    const orConditions = fields.map((field) => ({ [field]: regex }));
+    const searchQuery = { $or: orConditions };
+    //const results = await News.find({ $text: { $search: text } }).limit(5);
+    const results = await News.find(searchQuery).limit(5);
+    console.log(results);
+    return results;
+  } catch (error) {
+    console.log(error);
+  }
+};
 const NewsDataLayer = {
   AddNews,
   updateNews,
   deleteNews,
   getNews,
   getNewsById,
+  searchNews,
 };
 
 

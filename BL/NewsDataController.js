@@ -122,12 +122,24 @@ const getNews = async (req, res) => {
   //  console.log(defaultSearch['category'])
     defaultSearch["category"] = defaultSearch["category"].split(",");
   }
+ 
  // console.log(defaultSearch)
   //console.log(defaultSearch);
   const data = await NewsDataLayer.getNews(defaultSearch);
   // console.log(data);
 
   res.status(200).json({ status: "Sucess", data });
+};
+
+const searchNews = async (req, res) => {
+  try {
+    const search = req.body["search"];
+    const data = await NewsDataLayer.searchNews(search);  
+    
+    res.status(200).json({ status: "Sucess", data });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 function jsonToCSV(jsonObject, fileName) {
@@ -227,5 +239,6 @@ const NewsController = {
   creatCsvfile,
   getNewsById,
   serviceStaus,
+  searchNews,
 };
 module.exports = NewsController;
